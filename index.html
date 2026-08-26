@@ -28,7 +28,7 @@
             overflow: hidden;
         }
 
-        /* CORAZONES */
+        /* CORAZONES DECORATIVOS */
 
         .heart {
             position: absolute;
@@ -70,7 +70,7 @@
             }
         }
 
-        /* TARJETA */
+        /* TARJETA PRINCIPAL */
 
         .container {
             width: 90%;
@@ -121,6 +121,14 @@
             margin-bottom: 15px;
         }
 
+        .entrar {
+            background: linear-gradient(135deg, #f78fb3, #e85d91);
+            color: white;
+
+            box-shadow:
+                0 8px 20px rgba(232, 93, 145, 0.25);
+        }
+
         /* BOTONES */
 
         button {
@@ -136,14 +144,6 @@
 
         button:hover {
             transform: translateY(-4px) scale(1.04);
-        }
-
-        .entrar {
-            background: linear-gradient(135deg, #f78fb3, #e85d91);
-            color: white;
-
-            box-shadow:
-                0 8px 20px rgba(232, 93, 145, 0.25);
         }
 
         /* PREGUNTA */
@@ -323,10 +323,14 @@
 
 <body>
 
+    <!-- ========================= -->
     <!-- MÚSICAS -->
+    <!-- ========================= -->
 
     <audio id="musicaFondo" src="fondo.mp3" loop></audio>
+
     <audio id="musicaA" src="opciona.mp3" loop></audio>
+
     <audio id="musicaB" src="opcionb.mp3" loop></audio>
 
 
@@ -340,7 +344,9 @@
 
     <div class="container">
 
+        <!-- ========================= -->
         <!-- PANTALLA DE ENTRADA -->
+        <!-- ========================= -->
 
         <div id="entrada">
 
@@ -363,11 +369,15 @@
         </div>
 
 
+        <!-- ========================= -->
         <!-- PREGUNTA -->
+        <!-- ========================= -->
 
         <div id="question">
 
-            <div class="emoji">🌸</div>
+            <div class="emoji">
+                🌸
+            </div>
 
             <h1>
                 ¿Conoces a Mila?
@@ -392,7 +402,9 @@
         </div>
 
 
+        <!-- ========================= -->
         <!-- RESPUESTA SÍ -->
+        <!-- ========================= -->
 
         <div id="si" class="result">
 
@@ -436,7 +448,9 @@
         </div>
 
 
+        <!-- ========================= -->
         <!-- RESPUESTA NO -->
+        <!-- ========================= -->
 
         <div id="no" class="result">
 
@@ -452,6 +466,8 @@
                 No sabes de lo que te estás perdiendo... 🤭
             </p>
 
+            <!-- STICKER -->
+
             <img src="sticker.png" class="sticker">
 
             <button class="back" onclick="volver()">
@@ -465,14 +481,23 @@
 
     <script>
 
-        // MÚSICAS
+        /* ================================= */
+        /* OBTENER LAS MÚSICAS */
+        /* ================================= */
 
-        const musicaFondo = document.getElementById("musicaFondo");
-        const musicaA = document.getElementById("musicaA");
-        const musicaB = document.getElementById("musicaB");
+        const musicaFondo =
+            document.getElementById("musicaFondo");
+
+        const musicaA =
+            document.getElementById("musicaA");
+
+        const musicaB =
+            document.getElementById("musicaB");
 
 
-        // DETENER TODAS LAS MÚSICAS
+        /* ================================= */
+        /* DETENER TODAS LAS MÚSICAS */
+        /* ================================= */
 
         function detenerMusica() {
 
@@ -486,60 +511,86 @@
         }
 
 
-        // ENTRAR A LA PÁGINA
+        /* ================================= */
+        /* ENTRAR A LA PÁGINA */
+        /* ================================= */
 
         function entrar() {
 
+            // Detener cualquier música anterior
             detenerMusica();
 
+            // Iniciar música principal
             musicaFondo.play();
 
+            // Ocultar pantalla de entrada
             document.getElementById("entrada").style.display = "none";
+
+            // Mostrar pregunta
             document.getElementById("question").style.display = "block";
         }
 
 
-        // PRESIONAR SÍ
+        /* ================================= */
+        /* PRESIONAR SÍ */
+        /* ================================= */
 
         function mostrarMila() {
 
+            // Detener música de fondo
             detenerMusica();
 
+            // Iniciar música de opción A
             musicaA.play();
 
+            // Cambiar pantalla
             document.getElementById("question").style.display = "none";
+
             document.getElementById("no").style.display = "none";
 
             document.getElementById("si").style.display = "block";
         }
 
 
-        // PRESIONAR NO
+        /* ================================= */
+        /* PRESIONAR NO */
+        /* ================================= */
 
         function mostrarNo() {
 
+            // Detener música de fondo
             detenerMusica();
 
+            // Iniciar música de opción B
             musicaB.play();
 
+            // Cambiar pantalla
             document.getElementById("question").style.display = "none";
+
             document.getElementById("si").style.display = "none";
 
             document.getElementById("no").style.display = "block";
         }
 
 
-        // VOLVER AL INICIO
+        /* ================================= */
+        /* VOLVER AL INICIO */
+        /* ================================= */
 
         function volver() {
 
+            // Detener la música de A o B
             detenerMusica();
 
+            // Volver a iniciar música principal
             musicaFondo.play();
 
+            // Ocultar resultados
             document.getElementById("si").style.display = "none";
+
             document.getElementById("no").style.display = "none";
 
+            // Mostrar nuevamente la pregunta
             document.getElementById("question").style.display = "block";
         }
 
@@ -547,6 +598,3 @@
 
 </body>
 </html>
-
-
-
