@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>¿Conoces a Mila?</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Segoe UI", sans-serif;
+
+            background:
+                radial-gradient(circle at 20% 20%, #ffdce8 0%, transparent 30%),
+                radial-gradient(circle at 80% 80%, #e8ddff 0%, transparent 30%),
+                linear-gradient(135deg, #fff5f8, #f8f3ff);
+
+            overflow: hidden;
+        }
+
+        /* Corazones decorativos */
+
+        .heart {
+            position: absolute;
+            font-size: 25px;
+            opacity: 0.5;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .heart:nth-child(1) {
+            top: 10%;
+            left: 10%;
+        }
+
+        .heart:nth-child(2) {
+            top: 20%;
+            right: 12%;
+            animation-delay: 1s;
+        }
+
+        .heart:nth-child(3) {
+            bottom: 15%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+
+        .heart:nth-child(4) {
+            bottom: 10%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        /* Tarjeta principal */
+
+        .container {
+            width: 90%;
+            max-width: 520px;
+            padding: 45px 30px;
+            text-align: center;
+
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(15px);
+
+            border: 1px solid rgba(255,255,255,0.8);
+            border-radius: 30px;
+
+            box-shadow:
+                0 20px 60px rgba(160, 120, 160, 0.20);
+
+            animation: aparecer 0.8s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .emoji {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 34px;
+            color: #d45d88;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        /* Botones */
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        .yes {
+            background: linear-gradient(135deg, #f78fb3, #e85d91);
+            color: white;
+
+            box-shadow: 0 8px 20px rgba(232, 93, 145, 0.25);
+        }
+
+        .no {
+            background: white;
+            color: #d45d88;
+            border: 2px solid #f3bfd2;
+        }
+
+        button:hover {
+            transform: translateY(-4px) scale(1.04);
+        }
+
+        .yes:hover {
+            box-shadow: 0 12px 25px rgba(232, 93, 145, 0.35);
+        }
+
+        /* Resultado */
+
+        .result {
+            display: none;
+            animation: aparecer 0.6s ease;
+        }
+
+        .result h2 {
+            color: #d45d88;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            background: #fff7fa;
+            border-radius: 20px;
+            padding: 22px;
+            line-height: 1.7;
+            color: #666;
+            margin-top: 20px;
+            border: 1px solid #f8d5e1;
+        }
+
+        .mila {
+            font-size: 70px;
+            margin-bottom: 10px;
+        }
+
+        .funny {
+            font-size: 80px;
+            margin: 20px 0;
+            animation: saltar 1s infinite alternate;
+        }
+
+        @keyframes saltar {
+            from {
+                transform: rotate(-8deg) scale(1);
+            }
+
+            to {
+                transform: rotate(8deg) scale(1.1);
+            }
+        }
+
+        .miss {
+            color: #d45d88;
+            font-size: 38px;
+            font-weight: 800;
+        }
+
+        .small {
+            color: #888;
+            margin-top: 10px;
+        }
+
+        /* STICKER */
+
+        .sticker {
+            width: 150px;
+            height: auto;
+            max-width: 80%;
+
+            margin-top: 20px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 25px rgba(0, 0, 0, 0.15);
+
+            animation: aparecerSticker 0.7s ease;
+        }
+
+        @keyframes aparecerSticker {
+
+            from {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+
+        }
+
+        .back {
+            display: block;
+            margin: 25px auto 0;
+
+            background: #f8e5ed;
+            color: #c6537c;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 500px) {
+
+            .container {
+                padding: 35px 20px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            .miss {
+                font-size: 32px;
+            }
+
+            .sticker {
+                width: 130px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Decoración -->
+
+    <div class="heart">💗</div>
+    <div class="heart">✨</div>
+    <div class="heart">🌸</div>
+    <div class="heart">💕</div>
+
+
+    <div class="container">
+
+        <!-- PREGUNTA -->
+
+        <div id="question">
+
+            <div class="emoji">🌸</div>
+
+            <h1>¿Conoces a Mila?</h1>
+
+            <p class="subtitle">
+                Una pregunta aparentemente sencilla... 👀
+            </p>
+
+            <div class="buttons">
+
+                <button class="yes" onclick="mostrarMila()">
+                    💗 Sí
+                </button>
+
+                <button class="no" onclick="mostrarNo()">
+                    🙈 No
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESPUESTA SÍ -->
+
+        <div id="si" class="result">
+
+            <div class="mila">🌷</div>
+
+            <h2>¡Entonces conoces a Mila! 💕</h2>
+
+            <div class="description">
+
+                <p>
+                    <strong>Mila</strong> es una persona especial,
+                    de esas que dejan una pequeña huella allá donde van.
+                    ✨
+                </p>
+
+                <br>
+
+                <p>
+                    Tiene esa combinación de personalidad,
+                    encanto y locura que hace que sea imposible
+                    olvidarla. 🌸
+                </p>
+
+                <br>
+
+                <p>
+                    En resumen...
+                    <strong>Mila es Mila.</strong> 💗
+                </p>
+
+            </div>
+
+            <button class="back" onclick="volver()">
+                ↩ Volver
+            </button>
+
+        </div>
+
+
+        <!-- RESPUESTA NO -->
+
+        <div id="no" class="result">
+
+            <div class="funny">
+                😭
+            </div>
+
+            <div class="miss">
+                TE LO PIERDES
+            </div>
+
+            <p class="small">
+                No sabes de lo que te estás perdiendo... 🤭
+            </p>
+
+            <!-- STICKER -->
+
+            <img src="sticker.png" class="sticker">
+
+            <button class="back" onclick="volver()">
+                🔄 Intentar otra vez
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function mostrarMila() {
+
+            document.getElementById("question").style.display = "none";
+            document.getElementById("no").style.display = "none";
+
+            document.getElementById("si").style.display = "block";
+        }
+
+
+        function mostrarNo() {
+
+            document.getElementById("question").style.display = "none";
+            document.getElementById("si").style.display = "none";
+
+            document.getElementById("no").style.display = "block";
+        }
+
+
+        function volver() {
+
+            document.getElementById("si").style.display = "none";
+            document.getElementById("no").style.display = "none";
+
+            document.getElementById("question").style.display = "block";
+        }
+
+    </script>
+
+</body>
+</html>
