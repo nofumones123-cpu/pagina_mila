@@ -28,6 +28,8 @@
             overflow: hidden;
         }
 
+        /* CORAZONES */
+
         .heart {
             position: absolute;
             font-size: 25px;
@@ -68,6 +70,8 @@
             }
         }
 
+        /* TARJETA */
+
         .container {
             width: 90%;
             max-width: 520px;
@@ -98,6 +102,56 @@
             }
         }
 
+        /* PANTALLA DE ENTRADA */
+
+        #entrada h1 {
+            font-size: 34px;
+            color: #d45d88;
+            margin-bottom: 15px;
+        }
+
+        #entrada p {
+            color: #777;
+            font-size: 16px;
+            margin-bottom: 25px;
+        }
+
+        .entrada-emoji {
+            font-size: 65px;
+            margin-bottom: 15px;
+        }
+
+        /* BOTONES */
+
+        button {
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+
+        button:hover {
+            transform: translateY(-4px) scale(1.04);
+        }
+
+        .entrar {
+            background: linear-gradient(135deg, #f78fb3, #e85d91);
+            color: white;
+
+            box-shadow:
+                0 8px 20px rgba(232, 93, 145, 0.25);
+        }
+
+        /* PREGUNTA */
+
+        #question {
+            display: none;
+        }
+
         .emoji {
             font-size: 55px;
             margin-bottom: 15px;
@@ -121,22 +175,12 @@
             gap: 15px;
         }
 
-        button {
-            border: none;
-            padding: 14px 30px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: inherit;
-        }
-
         .yes {
             background: linear-gradient(135deg, #f78fb3, #e85d91);
             color: white;
 
-            box-shadow: 0 8px 20px rgba(232, 93, 145, 0.25);
+            box-shadow:
+                0 8px 20px rgba(232, 93, 145, 0.25);
         }
 
         .no {
@@ -145,13 +189,12 @@
             border: 2px solid #f3bfd2;
         }
 
-        button:hover {
-            transform: translateY(-4px) scale(1.04);
+        .yes:hover {
+            box-shadow:
+                0 12px 25px rgba(232, 93, 145, 0.35);
         }
 
-        .yes:hover {
-            box-shadow: 0 12px 25px rgba(232, 93, 145, 0.35);
-        }
+        /* RESULTADOS */
 
         .result {
             display: none;
@@ -206,6 +249,8 @@
             margin-top: 10px;
         }
 
+        /* STICKER */
+
         .sticker {
             width: 150px;
             height: auto;
@@ -243,6 +288,8 @@
             color: #c6537c;
         }
 
+        /* RESPONSIVE */
+
         @media (max-width: 500px) {
 
             .container {
@@ -279,11 +326,11 @@
     <!-- MÚSICAS -->
 
     <audio id="musicaFondo" src="fondo.mp3" loop></audio>
-    <audio id="musicaA" src="opciona.mp3"></audio>
-    <audio id="musicaB" src="opcionb.mp3"></audio>
+    <audio id="musicaA" src="opciona.mp3" loop></audio>
+    <audio id="musicaB" src="opcionb.mp3" loop></audio>
 
 
-    <!-- Decoración -->
+    <!-- CORAZONES -->
 
     <div class="heart">💗</div>
     <div class="heart">✨</div>
@@ -293,13 +340,38 @@
 
     <div class="container">
 
+        <!-- PANTALLA DE ENTRADA -->
+
+        <div id="entrada">
+
+            <div class="entrada-emoji">
+                🌸
+            </div>
+
+            <h1>
+                Una pequeña pregunta...
+            </h1>
+
+            <p>
+                Antes de continuar, pulsa el botón. 👀
+            </p>
+
+            <button class="entrar" onclick="entrar()">
+                💗 Entrar
+            </button>
+
+        </div>
+
+
         <!-- PREGUNTA -->
 
         <div id="question">
 
             <div class="emoji">🌸</div>
 
-            <h1>¿Conoces a Mila?</h1>
+            <h1>
+                ¿Conoces a Mila?
+            </h1>
 
             <p class="subtitle">
                 Una pregunta aparentemente sencilla... 👀
@@ -324,9 +396,13 @@
 
         <div id="si" class="result">
 
-            <div class="mila">🌷</div>
+            <div class="mila">
+                🌷
+            </div>
 
-            <h2>¡Entonces conoces a Mila! 💕</h2>
+            <h2>
+                ¡Entonces conoces a Mila! 💕
+            </h2>
 
             <div class="description">
 
@@ -389,14 +465,14 @@
 
     <script>
 
-        // Obtener las tres músicas
+        // MÚSICAS
 
         const musicaFondo = document.getElementById("musicaFondo");
         const musicaA = document.getElementById("musicaA");
         const musicaB = document.getElementById("musicaB");
 
 
-        // Detener todas las músicas
+        // DETENER TODAS LAS MÚSICAS
 
         function detenerMusica() {
 
@@ -410,19 +486,20 @@
         }
 
 
-        // Música de inicio
+        // ENTRAR A LA PÁGINA
 
-        function iniciarMusicaFondo() {
+        function entrar() {
 
             detenerMusica();
 
-            musicaFondo.play().catch(() => {
-                console.log("El navegador bloqueó el inicio automático del audio.");
-            });
+            musicaFondo.play();
+
+            document.getElementById("entrada").style.display = "none";
+            document.getElementById("question").style.display = "block";
         }
 
 
-        // Cuando se presiona SÍ
+        // PRESIONAR SÍ
 
         function mostrarMila() {
 
@@ -437,7 +514,7 @@
         }
 
 
-        // Cuando se presiona NO
+        // PRESIONAR NO
 
         function mostrarNo() {
 
@@ -452,27 +529,24 @@
         }
 
 
-        // Volver al inicio
+        // VOLVER AL INICIO
 
         function volver() {
+
+            detenerMusica();
+
+            musicaFondo.play();
 
             document.getElementById("si").style.display = "none";
             document.getElementById("no").style.display = "none";
 
             document.getElementById("question").style.display = "block";
-
-            iniciarMusicaFondo();
         }
-
-
-        // Intentar iniciar la música de fondo
-
-        window.addEventListener("load", function() {
-            iniciarMusicaFondo();
-        });
 
     </script>
 
 </body>
 </html>
-```
+
+
+
