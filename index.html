@@ -28,8 +28,6 @@
             overflow: hidden;
         }
 
-        /* Corazones decorativos */
-
         .heart {
             position: absolute;
             font-size: 25px;
@@ -69,8 +67,6 @@
                 transform: translateY(-20px) rotate(10deg);
             }
         }
-
-        /* Tarjeta principal */
 
         .container {
             width: 90%;
@@ -119,8 +115,6 @@
             margin-bottom: 30px;
         }
 
-        /* Botones */
-
         .buttons {
             display: flex;
             justify-content: center;
@@ -158,8 +152,6 @@
         .yes:hover {
             box-shadow: 0 12px 25px rgba(232, 93, 145, 0.35);
         }
-
-        /* Resultado */
 
         .result {
             display: none;
@@ -214,8 +206,6 @@
             margin-top: 10px;
         }
 
-        /* STICKER */
-
         .sticker {
             width: 150px;
             height: auto;
@@ -253,8 +243,6 @@
             color: #c6537c;
         }
 
-        /* Responsive */
-
         @media (max-width: 500px) {
 
             .container {
@@ -280,12 +268,20 @@
             .sticker {
                 width: 130px;
             }
+
         }
 
     </style>
 </head>
 
 <body>
+
+    <!-- MÚSICAS -->
+
+    <audio id="musicaFondo" src="fondo.mp3" loop></audio>
+    <audio id="musicaA" src="opciona.mp3"></audio>
+    <audio id="musicaB" src="opcionb.mp3"></audio>
+
 
     <!-- Decoración -->
 
@@ -380,8 +376,6 @@
                 No sabes de lo que te estás perdiendo... 🤭
             </p>
 
-            <!-- STICKER -->
-
             <img src="sticker.png" class="sticker">
 
             <button class="back" onclick="volver()">
@@ -395,7 +389,46 @@
 
     <script>
 
+        // Obtener las tres músicas
+
+        const musicaFondo = document.getElementById("musicaFondo");
+        const musicaA = document.getElementById("musicaA");
+        const musicaB = document.getElementById("musicaB");
+
+
+        // Detener todas las músicas
+
+        function detenerMusica() {
+
+            musicaFondo.pause();
+            musicaA.pause();
+            musicaB.pause();
+
+            musicaFondo.currentTime = 0;
+            musicaA.currentTime = 0;
+            musicaB.currentTime = 0;
+        }
+
+
+        // Música de inicio
+
+        function iniciarMusicaFondo() {
+
+            detenerMusica();
+
+            musicaFondo.play().catch(() => {
+                console.log("El navegador bloqueó el inicio automático del audio.");
+            });
+        }
+
+
+        // Cuando se presiona SÍ
+
         function mostrarMila() {
+
+            detenerMusica();
+
+            musicaA.play();
 
             document.getElementById("question").style.display = "none";
             document.getElementById("no").style.display = "none";
@@ -404,7 +437,13 @@
         }
 
 
+        // Cuando se presiona NO
+
         function mostrarNo() {
+
+            detenerMusica();
+
+            musicaB.play();
 
             document.getElementById("question").style.display = "none";
             document.getElementById("si").style.display = "none";
@@ -413,15 +452,27 @@
         }
 
 
+        // Volver al inicio
+
         function volver() {
 
             document.getElementById("si").style.display = "none";
             document.getElementById("no").style.display = "none";
 
             document.getElementById("question").style.display = "block";
+
+            iniciarMusicaFondo();
         }
+
+
+        // Intentar iniciar la música de fondo
+
+        window.addEventListener("load", function() {
+            iniciarMusicaFondo();
+        });
 
     </script>
 
 </body>
 </html>
+```
